@@ -1,8 +1,9 @@
-<?php // Homepage.php
+<?php // index.php
 
 /*Notes
-This is the home page, it will link to all of the 
-other desired pages.*/
+This is the homepage, but as an index.php 
+Without it, errors would occur.
+*/
 
 include "dbcon.php";
 
@@ -84,7 +85,7 @@ try {
     <footer class="bg-dark text-white text-center py-2">
         <!-- bg-dark, text-white, text-center, py-2: These are Bootstrap classes for styling the footer. -->
 
-        &copy; (Testing)
+        &copy; CPS 4951 Final Proj. (Testing)
     </footer>
 
 </body>

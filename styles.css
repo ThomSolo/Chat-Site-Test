@@ -1,56 +1,99 @@
+/* Styles.css */
+
 /*
 Notes
 This is the styles sheet.
-This is where all the the formatting of the page comes from*/
+This is where all the formatting of the page comes from
+*/
 
+/* General styles */
+
+/* Sets basic styles for the body element */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    display: flex; /* Establishes a flex container */
+    flex-direction: column; /* Arranges child elements vertically */
+    min-height: 100vh; /* Ensures the body takes at least the full height of the viewport */
 }
 
+/* Styles for navigation bar */
 nav {
-    background-color: #555;
-    padding: 10px;
+    background-color: #555; /* Background color for navigation bar */
+    padding: 10px; /* Adds padding around navigation links */
 }
 
+/* Styles for navigation links */
 nav a {
-    color: #fff;
-    text-decoration: none;
-    padding: 10px 20px;
-    margin: 0 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-    font-size: 18px;
+    color: #fff; /* Text color for navigation links */
+    text-decoration: none; /* Removes underlines from navigation links */
+    padding: 10px 20px; /* Adds padding around navigation links */
+    margin: 0 10px; /* Adds margin between navigation links */
+    border-radius: 5px; /* Adds rounded corners to navigation links */
+    transition: background-color 0.3s; /* Smooth transition for background color change */
+    font-size: 18px; /* Sets font size for navigation links */
 }
 
+/* Styles for navigation links on hover */
 nav a:hover {
-    background-color: #777;
+    background-color: #777; /* Background color change when hovering over navigation links */
 }
 
+/* Styles for header */
 header {
-    background-color: #333;
-    color: #fff;
-    padding: 1px;
-    text-align: center;
+    background-color: #333; /* Background color for header */
+    color: #fff; /* Text color for header */
+    padding: 1px; /* Adds padding to the header */
+    text-align: center; /* Centers the text in the header */
 }
 
+/* Styles for main content area */
 main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    background-color: #cccaca;
-    font-size: 20px;
-    text-align: justify;
+    flex: 1; /* Allows main content area to grow to fill available space */
+    display: flex; /* Establishes a flex container */
+    flex-direction: column; /* Arranges child elements vertically */
+    padding: 20px; /* Adds padding around the main content */
+    background-color: #cccaca; /* Background color for the main content */
+    font-size: 20px; /* Sets font size for the main content */
+    text-align: justify; /* Justifies the text in the main content */
 }
 
+/* Styles for footer */
 footer {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-    font-size: 16px;
+    background-color: #333; /* Background color for footer */
+    color: #fff; /* Text color for footer */
+    padding: 10px; /* Adds padding to the footer */
+    text-align: center; /* Centers the text in the footer */
+    font-size: 16px; /* Sets font size for the footer */
+}
+
+/* Add these styles for autocomplete */
+/* Styles for autocomplete container */
+.autocomplete {
+    position: relative; /* Specifies the position relative to its normal position */
+    display: inline-block; /* Displays the element as an inline-level block container */
+}
+
+/* Styles for autocomplete items */
+.autocomplete-items {
+    position: absolute; /* Positions the autocomplete items relative to its closest positioned ancestor */
+    border: 1px solid #d4d4d4; /* Adds border to autocomplete items */
+    border-bottom: none; /* Removes bottom border */
+    border-top: none; /* Removes top border */
+    z-index: 99; /* Sets the stack order of the autocomplete items */
+    top: 100%; /* Positions the autocomplete items below the autocomplete container */
+    left: 0; /* Aligns the autocomplete items with the left edge of the autocomplete container */
+    right: 0; /* Aligns the autocomplete items with the right edge of the autocomplete container */
+}
+
+/* Styles for autocomplete item */
+.autocomplete-items div {
+    cursor: pointer; /* Changes cursor to pointer on hover */
+    background-color: #fff; /* Background color for autocomplete items */
+    border-bottom: 1px solid #d4d4d4; /* Adds bottom border to autocomplete items */
+}
+
+/* Styles for autocomplete item on hover */
+.autocomplete-items div:hover {
+    background-color: #e9e9e9; /* Background color change when hovering over autocomplete items */
 }

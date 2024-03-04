@@ -1,13 +1,13 @@
-<?php // Homepage.php
+<?php // About Us.php
 
 /*Notes
-This is the home page, it will link to all of the 
-other desired pages.*/
+This is an about us page. */
 
-include "dbcon.php";
+include "dbcon.php"; // Includes the database connection file
 
-// Creates connection
-session_start();
+
+session_start(); // Starts a session
+
 
 try {
     $pdo = new PDO($attr, $user, $pass, $opts); // Creates a PDO instance for database connection
@@ -15,6 +15,7 @@ try {
     throw new PDOException($e->getMessage(), (int) $e->getCode()); // Throws PDOException if connection fails
 }
 ?>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -35,7 +36,8 @@ try {
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
-    <title>Home Page</title>
+
+    <title>About Us</title>
 </head>
 
 
@@ -44,9 +46,9 @@ try {
     Also ensuring the body uses full hgiht of viewpoert ('h-100') alloing it to be flexible and responsive. -->
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-         <!-- navbar, navbar-expand-lg, navbar-dark, bg-dark: These are Bootstrap classes for styling the navigation bar. -->
+        <!-- navbar, navbar-expand-lg, navbar-dark, bg-dark: These are Bootstrap classes for styling the navigation bar. -->
 
-         <div class="container">
+        <div class="container">
             <!-- container: Bootstrap class for creating a fixed-width container to hold and center the content within it. -->
 
             <a href="Homepage.php">Home</a> <!-- Link to Homepage.php -->
@@ -66,20 +68,30 @@ try {
     </nav>
 
     <header class="bg-secondary text-white text-center py-2">
-          <!-- bg-secondary, text-white, text-center, py-2: These are Bootstrap classes for styling the header. -->
+        <!-- bg-secondary, text-white, text-center, py-2: These are Bootstrap classes for styling the header. -->
 
-        <h1>Home Page</h1>
+        <h1>About Us</h1>
     </header>
 
     <main class="flex-grow-1 d-flex flex-column">
         <!-- flex-grow-1, d-flex, flex-column: These are Bootstrap classes for styling the main content area. -->
 
-        <p>Welcome to this Public Chat Room. </br>
-            You must have an account to Log in and Talk to others. </br>
-            Please, feel free to create an account. </br></br>
-            Before you do anything, please view the "Rules" by clicking it above.
+        <p> Information about group here </p>
+        <!--
+        <p>
+            Rules: </br></br>
+
+            1. Please be respectful to others.</br>
+            2. No profanity or non-work-friendly language is not allowed</br>
+            3. Do not create inappropriate usernames or chat messages</br></br>
+
+            Please abide by these rules to avoid your account being banned.</br></br>
+
+            Besides that, please enjoy your time here.
         </p>
+        -->
     </main>
+
 
     <footer class="bg-dark text-white text-center py-2">
         <!-- bg-dark, text-white, text-center, py-2: These are Bootstrap classes for styling the footer. -->

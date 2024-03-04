@@ -1,13 +1,8 @@
-<!--Name: Solomon Thomas -->
+<?php 
+// Logout.php
 
-<!--Class: CPS 3351 -->
-
-<!--Group Project: Phase V (Phase 5)-->
-
-<!--Notes-->
-<!--This page has a simple role. All it does is logs out the user if the user is logged in.-->
-
-<?php // Logout.php
+/*Notes
+This page has a simple role. All it does is logs out the user if the user is logged in.*/
 
 // Starts the session
 session_start();
@@ -19,6 +14,6 @@ $_SESSION = array();
 session_destroy();
 
 // Redirects to the login page
-header('Location: Login.php');
+header('Location: Signin_up.php');
 exit();
 ?>

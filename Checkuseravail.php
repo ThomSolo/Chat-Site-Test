@@ -1,46 +1,37 @@
-<!--Notes-->
-<!--This file works with jquery (from Create.php). In this file, it uses an Ajax request and 
-send the entered username to this file. Once sent, this file will check the SQL database we have
-and make sure there is no duplicate name (no username that matches the wanted/entered username).-->
+<?php 
+// Checkuseravail.php
 
-<?php // Checkuseravail.php
-$host = 'localhost';    // Change as necessary
-$data = 'testbase'; // Change as necessary
-$user = 'tester';        // Change as necessary
-$pass = 'comptest';        // Change as necessary
-$chrs = 'utf8mb4';
-$attr = "mysql:host=$host;dbname=$data;charset=$chrs";
-$opts =
-    [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        PDO::ATTR_EMULATE_PREPARES => false,
-    ];
+/*Notes
+This file works with jquery (from Create.php). In this file, it uses an Ajax request and 
+sends the entered username to this file. Once sent, this file will check the SQL database we have
+and make sure there is no duplicate name (no username that matches the wanted/entered username).*/
+
+include "dbcon.php"; // Includes the database connection file
 
 // Starts the session
 session_start();
 
 // Creates connection
 try {
-    $pdo = new PDO($attr, $user, $pass, $opts);
+    $pdo = new PDO($attr, $user, $pass, $opts); // Creates a PDO instance for database connection
 } catch (PDOException $e) {
-    throw new PDOException($e->getMessage(), (int) $e->getCode());
+    throw new PDOException($e->getMessage(), (int) $e->getCode()); // Throws PDOException if connection fails
 }
 
 // Gets the entered username from the AJAX request
 $username = isset($_POST['username']) ? $_POST['username'] : '';
 
 // Checks if the username is available
-$checkQuery = "SELECT COUNT(*) FROM UserAccount WHERE Username = :username";
-$checkStatement = $pdo->prepare($checkQuery);
-$checkStatement->bindParam(':username', $username, PDO::PARAM_STR);
-$checkStatement->execute();
-$count = $checkStatement->fetchColumn();
+$checkQuery = "SELECT COUNT(*) FROM UserAccount WHERE Username = :username"; // SQL query to count occurrences of the entered username
+$checkStatement = $pdo->prepare($checkQuery); // Prepares the SQL statement
+$checkStatement->bindParam(':username', $username, PDO::PARAM_STR); // Binds the parameter
+$checkStatement->execute(); // Executes the SQL statement
+$count = $checkStatement->fetchColumn(); // Fetches the result count
 
 // Sends the response back to the AJAX request
 if ($count > 0) {
-    echo '<span style="color: red;">Username not available</span>';
+    echo '<span style="color: red;">Username not available</span>'; // Echoes a message indicating that the username is not available
 } else {
-    echo '<span style="color: green;">Username available</span>';
+    echo '<span style="color: green;">Username available</span>'; // Echoes a message indicating that the username is available
 }
 ?>

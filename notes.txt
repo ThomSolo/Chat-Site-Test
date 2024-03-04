@@ -1,0 +1,16 @@
+In this folder (project), the following sites were used:
+[Boostrap.com](https://getbootstrap.com/)
+[000webhost.com](https://www.000webhost.com/)
+
+Bootstrap - Used to temporarly hold together the website.
+This was used to make it flexible. If you would like to delete it, please
+do so. I do have a styles.css which is also used, but if you see things like:
+class="d-flex flex-column h-100"
+class="navbar navbar-expand-lg navbar-dark bg-dark"
+
+That is bootstrap at work.
+
+000webhost - This site is being used to Host all of the code.
+Currently, my main plan is to host as 705. The site will
+go down next year (01/2025) due to temporary free web hosting (which isn't really mentioned).
+
