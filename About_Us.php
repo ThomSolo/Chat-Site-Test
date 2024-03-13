@@ -76,7 +76,6 @@ try {
 
 
     <footer>
-        <!-- bg-dark, text-white, text-center, py-2: These are Bootstrap classes for styling the footer. -->
 
         &copy; (Testing)
     </footer>
