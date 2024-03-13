@@ -67,7 +67,8 @@ footer {
     font-size: 16px; /* Sets font size for the footer */
 }
 
-/* Add these styles for autocomplete */
+
+
 /* Styles for autocomplete container */
 .autocomplete {
     position: relative; /* Specifies the position relative to its normal position */

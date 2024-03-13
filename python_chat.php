@@ -25,7 +25,7 @@ try {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sendMessage'])) { // Checks if the form is submitted and the send message button is clicked
-        
+
     if (!isset($_POST['token']) || $_POST['token'] !== $_SESSION['csrf_token']) { // Verify token
         header('Location: python_chat.php');
         exit();
@@ -64,8 +64,9 @@ $selectQuery = "SELECT m.MessageID, m.Content, m.IsPrivate, m.Timestamp, u.Usern
 $statement = $pdo->prepare($selectQuery); // Prepares the select query
 $statement->execute(); // Executes the select query
 $messages = $statement->fetchAll(PDO::FETCH_ASSOC); // Fetches the messages from the database
-
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -74,63 +75,44 @@ $messages = $statement->fetchAll(PDO::FETCH_ASSOC); // Fetches the messages from
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> <!-- Including Bootstrap CSS from CDN -->
-
     <!-- Custom stylesheet -->
     <link rel="stylesheet" href="styles.css"><!-- Linking to a custom stylesheet named styles.css -->
 
-    <!-- Bootstrap JS and Popper.js (required for Bootstrap) (From a CDN) -->
-    <!-- A content delivery network (CDN) is a network of interconnected servers that speeds up webpage loading for data-heavy applications. -->
-    <!-- Source: https://aws.amazon.com/what-is/cdn/#:~:text=A%20content%20delivery%20network%20(CDN,loading%20for%20data%2Dheavy%20applications.) -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-
-    <title>Python Chat Room - <?php echo $loggedInUsername; ?></title> <!-- For displaying the user's username by the Title --> 
+    <title>Python Chat Room -
+        <?php echo $loggedInUsername; ?>
+    </title> <!-- For displaying the user's username by the Title -->
 </head>
 
-<body class="d-flex flex-column h-100">
-    <!-- d-flex, flex-column, h-100: Bootstrap classes to make the body of html flex container with column layout. 
-    Also ensuring the body uses full hgiht of viewpoert ('h-100') alloing it to be flexible and responsive. -->
+<body>
+    <nav>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-         <!-- navbar, navbar-expand-lg, navbar-dark, bg-dark: These are Bootstrap classes for styling the navigation bar. -->
+        <a href="Homepage.php">Home</a> <!-- Link to Homepage.php -->
+        <a href="About_Us.php">About Us</a> <!-- Link to About_Us.php -->
+        <a href="Signin_up.php">SignUp/Login</a> <!-- Link to Signin_up.php -->
 
-         <div class="container">
-            <!-- container: Bootstrap class for creating a fixed-width container to hold and center the content within it. -->
-
-            <a href="Homepage.php">Home</a> <!-- Link to Homepage.php -->
-            <a href="About_Us.php">About Us</a> <!-- Link to About_Us.php -->
-            <a href="Signin_up.php">SignUp/Login</a> <!-- Link to Signin_up.php -->
-
-            <?php
-            // Displays the Logout link if the user is logged in
-            if (isset($_SESSION['loggedInUserID'])) { // Checks if a user is logged in
-                echo '<a href="Chatroom.php">Chat Room</a>'; // Link to Chatroom.php
-                echo '<a href="Sendpm.php">Send Private Message</a>'; // Link to Sendpm.php
-                echo '<a href="Pms.php">Private Messages</a>'; // Link to Pms.php
-                echo '<a href="Logout.php">Logout</a>'; // Link to Logout.php
-            }
-            ?>
-        </div>
+        <?php
+        // Displays the Logout link if the user is logged in
+        if (isset($_SESSION['loggedInUserID'])) { // Checks if a user is logged in
+            echo '<a href="Chatroom.php">Chat Room</a>'; // Link to Chatroom.php
+            echo '<a href="Sendpm.php">Send Private Message</a>'; // Link to Sendpm.php
+            echo '<a href="Pms.php">Private Messages</a>'; // Link to Pms.php
+            echo '<a href="Logout.php">Logout</a>'; // Link to Logout.php
+        }
+        ?>
     </nav>
 
-    <header class="bg-secondary text-white text-center py-2">
-    <!-- bg-secondary, text-white, text-center, py-2: These are Bootstrap classes for styling the header. -->
+    <header>
+        <h1>Python Chat Room -
+            <?php echo $loggedInUsername; ?>
+        </h1> <!-- Shows the User's username on the header of the page by "Chat Room" -->
+    </header>
 
-    <h1>Python Chat Room - <?php echo $loggedInUsername; ?></h1> <!-- Shows the User's username on the header of the page by "Chat Room" -->
-</header>
+    <main>
 
-<main class="flex-grow-1 d-flex flex-column">
-    <!-- flex-grow-1, d-flex, flex-column: These are Bootstrap classes for styling the main content area. -->
-
-    <div class="chat-box">
-        <!-- chat-box: From the custom css that styles the webpage-->
-        
         <?php
         foreach ($messages as $message) { // Iterates through each message
             $messageClass = ''; // Initializes the message class
-
+        
             if (isset($message['UserID'])) { // Checks if the message has a user ID
                 // Sets the message class based on whether it's from the logged-in user or another user
                 $messageClass = ($message['UserID'] == $loggedInUserID) ? 'user-message' : 'other-message';
@@ -138,10 +120,10 @@ $messages = $statement->fetchAll(PDO::FETCH_ASSOC); // Fetches the messages from
 
             // Displays the message content, username, and timestamp
             echo "<div class='chat-message $messageClass' data-timestamp='{$message['Timestamp']}'>";
-                echo "<strong>{$message['Username']}</strong>: {$message['Content']}";
+            echo "<strong>{$message['Username']}</strong>: {$message['Content']}";
 
             if (isset($message['UserID']) && $message['UserID'] == $loggedInUserID) { // Checks if the message is from the logged-in user
-
+        
 
                 echo " <a href='python_edit_mes.php?messageID={$message['MessageID']}'>Edit</a>"; // Links to "python_edit_mes.php", it edits messages.
                 echo " <a href='python_delete_mes.php?messageID={$message['MessageID']}'>Delete</a>"; // Links to "python_delete_mes.php", it edits messages.
@@ -150,27 +132,27 @@ $messages = $statement->fetchAll(PDO::FETCH_ASSOC); // Fetches the messages from
             echo "</div>"; // Closes the chat message div
         }
         ?>
-    </div>
 
-    <div class="message-input">
-        <!-- message-input: From the custom css that makes a division and styles the webpage -->
+
 
         <form method="post" action="">
-        <input type="hidden" name="token" value="<?php echo $csrf_token; ?>">  <!-- For amking a message unique (preventing errors) -->
-            <textarea name="messageContent" rows="3" required placeholder="Type your message..."></textarea> <!-- Text area for entering the message content -->
+            <input type="hidden" name="token" value="<?php echo $csrf_token; ?>">
+            <!-- For amking a message unique (preventing errors) -->
+            <textarea name="messageContent" rows="3" required placeholder="Type your message..."></textarea>
+            <!-- Text area for entering the message content -->
             <input type="submit" name="sendMessage" value="Send"> <!-- Submit button for sending the message -->
         </form>
-    </div>
-</main>
 
-<footer class="bg-dark text-white text-center py-2">
-    <!-- bg-dark, text-white, text-center, py-2: These are Bootstrap classes for styling the footer. -->
-    
-    &copy; (Testing)
-</footer>
+    </main>
 
-  <!-- JavaScript to convert UTC timestamps to local time -->
-  <script>
+    <footer>
+        &copy; (Testing)
+    </footer>
+
+
+
+    <!-- JavaScript to convert UTC timestamps to local time -->
+    <script>
         document.addEventListener("DOMContentLoaded", function () {
             const chatMessages = document.querySelectorAll('.chat-message');
             chatMessages.forEach(message => {

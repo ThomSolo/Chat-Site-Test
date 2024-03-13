@@ -95,6 +95,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -102,18 +104,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Including Bootstrap CSS from CDN -->
-
     <!-- Custom stylesheet -->
     <link rel="stylesheet" href="styles.css"><!-- Linking to a custom stylesheet named styles.css -->
 
-    <!-- Bootstrap JS and Popper.js (required for Bootstrap) (From a CDN) -->
-    <!-- A content delivery network (CDN) is a network of interconnected servers that speeds up webpage loading for data-heavy applications. -->
-    <!-- Source: https://aws.amazon.com/what-is/cdn/#:~:text=A%20content%20delivery%20network%20(CDN,loading%20for%20data%2Dheavy%20applications.) -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
     <!-- Script for showing prompt if user is not logged in -->
     <script>
@@ -128,94 +121,84 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     </script>
 
+
     <title>Login Page</title>
 </head>
 
 <body>
+    <nav>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <!-- navbar, navbar-expand-lg, navbar-dark, bg-dark: These are Bootstrap classes for styling the navigation bar. -->
+        <a href="Homepage.php">Home</a> <!-- Link to Homepage.php -->
+        <a href="About_Us.php">About Us</a> <!-- Link to About_Us.php -->
+        <a href="Signin_up.php">SignUp/Login</a> <!-- Link to Signin_up.php -->
 
-        <div class="container">
-            <!-- container: Bootstrap class for creating a fixed-width container to hold and center the content within it. -->
-
-            <a href="Homepage.php">Home</a> <!-- Link to Homepage.php -->
-            <a href="About_Us.php">About Us</a> <!-- Link to About_Us.php -->
-            <a href="Signin_up.php">SignUp/Login</a> <!-- Link to Signin_up.php -->
-
-            <?php
-            // Displays the Logout link if the user is logged in
-            if (isset($_SESSION['loggedInUserID'])) { // Checks if a user is logged in
-                echo '<a href="Chatroom.php">Chat Room</a>'; // Link to Chatroom.php
-                echo '<a href="Sendpm.php">Send Private Message</a>'; // Link to Sendpm.php
-                echo '<a href="Pms.php">Private Messages</a>'; // Link to Pms.php
-                echo '<a href="Logout.php">Logout</a>'; // Link to Logout.php
-            }
-            ?>
-        </div>
+        <?php
+        // Displays the Logout link if the user is logged in
+        if (isset($_SESSION['loggedInUserID'])) { // Checks if a user is logged in
+            echo '<a href="Chatroom.php">Chat Room</a>'; // Link to Chatroom.php
+            echo '<a href="Sendpm.php">Send Private Message</a>'; // Link to Sendpm.php
+            echo '<a href="Pms.php">Private Messages</a>'; // Link to Pms.php
+            echo '<a href="Logout.php">Logout</a>'; // Link to Logout.php
+        }
+        ?>
     </nav>
 
-    <header class="bg-secondary text-white text-center py-2">
-        <!-- bg-secondary, text-white, text-center, py-2: These are Bootstrap classes for styling the header. -->
-
+    <header>
         <h1>Sign in / Sign Up</h1>
     </header>
 
     <main>
-        <div class="container"> <!-- Class used to style webpage -->
-            <div class="row"> <!-- Class used to style webpage -->
+        <h2>Create Account</h2>
 
-                <!-- Create Account Section -->
-                <div class="col">
-                    <h2>Create Account</h2>
-                    <?php if (isset($createMessage)) // Display create message if set
-                            echo $createMessage; ?>
-                    <form method="post" action="">
-                        <!-- Username input -->
-                        <label for="username">Username:</label>
-                        <input type="text" name="username" required><br><br>
+        <?php if (isset($createMessage)) // Display create message if set
+                echo $createMessage; ?>
+        <form method="post" action="">
 
-                        <!-- Password input -->
-                        <label for="password">Password:</label>
-                        <input type="password" name="password" required><br><br>
 
-                        <!-- Email input -->
-                        <label for="email">Email:</label>
-                        <input type="email" name="email" required><br><br>
+            <!-- Username input -->
+            <label for="username">Username:</label>
+            <input type="text" name="username" required><br><br>
 
-                        <!-- Create account button -->
-                        <input type="submit" name="createAccount" value="Create Account">
-                    </form>
-                </div>
+            <!-- Password input -->
+            <label for="password">Password:</label>
+            <input type="password" name="password" required><br><br>
 
-                <!-- Login Section -->
-                <div class="col">
-                    <h2>Login</h2>
-                    <?php if (isset($loginMessage)) // Display login message if set
-                            echo "<p>$loginMessage</p>"; ?>
-                    <form method="post" action="">
-                        <!-- Login username input -->
-                        <label for="loginUsername">Username:</label>
-                        <input type="text" name="loginUsername" required><br><br>
+            <!-- Email input -->
+            <label for="email">Email:</label>
+            <input type="email" name="email" required><br><br>
 
-                        <!-- Login password input -->
-                        <label for="loginPassword">Password:</label>
-                        <input type="password" name="loginPassword" required><br><br>
+            <!-- Create account button -->
+            <input type="submit" name="createAccount" value="Create Account">
+        </form>
 
-                        <!-- Link to forgot password page -->
-                        <a href="forgot_pass.php">Forgot Password?</a><br><br>
 
-                        <!-- Login button -->
-                        <input type="submit" name="login" value="Login">
-                    </form>
-                </div>
-            </div>
-        </div>
+        <!-- Login Section -->
+
+        <h2>Login</h2>
+        
+        <?php if (isset($loginMessage)) // Display login message if set
+                echo "<p>$loginMessage</p>"; ?>
+        <form method="post" action="">
+
+
+            <!-- Login username input -->
+            <label for="loginUsername">Username:</label>
+            <input type="text" name="loginUsername" required><br><br>
+
+            <!-- Login password input -->
+            <label for="loginPassword">Password:</label>
+            <input type="password" name="loginPassword" required><br><br>
+
+            <!-- Link to forgot password page -->
+            <a href="forgot_pass.php">Forgot Password?</a><br><br>
+
+            <!-- Login button -->
+            <input type="submit" name="login" value="Login">
+        </form>
+
     </main>
 
-    <footer class="bg-dark text-white text-center py-2">
-        <!-- bg-dark, text-white, text-center, py-2: These are Bootstrap classes for styling the footer. -->
-
+    <footer>
         &copy; (Testing)
     </footer>
 
